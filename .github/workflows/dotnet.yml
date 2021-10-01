@@ -12,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Change to Project Directory
-      run: cd HelloWorld
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -22,6 +20,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ./HelloWorld/HelloWorld.sln --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Publish FluentEmail.Core
+      uses: brandedoutcast/publish-nuget@v2.5.2
+      with:
+          PROJECT_FILE_PATH: HelloWorld/HelloWorld.csproj
+          NUGET_KEY: ${{secrets.NUGET_KEY}}
