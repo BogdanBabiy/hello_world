@@ -21,9 +21,15 @@ jobs:
       run: dotnet restore HelloWorld/HelloWorld.sln
     - name: Build
       run: dotnet build HelloWorld/HelloWorld.sln --no-restore
-    - name: Publish FluentEmail.Core
-      uses: brandedoutcast/publish-nuget@v2.5.2
-      with:
-          PROJECT_FILE_PATH: HelloWorld/HelloWorld/HelloWorld.csproj
-          NUGET_SOURCE: https://useast.jfrog.lexisnexisrisk.com/artifactory/api/nuget/emlage-localtest
-          NUGET_KEY: ${{secrets.JFROG_KEY}}
+    - name: Add NuGet Source
+      run: nuget sources Add -Name Artifactory -Source https://useast.jfrog.lexisnexisrisk.com/artifactory/api/nuget/emlage-localtest -username babibo01@risk.regn.net -password ${{secrets.JFROG_KEY}}
+    - name: Set API Key
+      run: nuget setapikey babibo01@risk.regn.net:${{secrets.JFROG_KEY}} -Source Artifactory
+    - name: Publish Package
+      run: nuget push HelloWorld/HelloWorld/HelloWorld.csproj -Source Artifactory
+#     - name: Publish FluentEmail.Core
+#       uses: brandedoutcast/publish-nuget@v2.5.2
+#       with:
+#           PROJECT_FILE_PATH: HelloWorld/HelloWorld/HelloWorld.csproj
+#           NUGET_SOURCE: https://useast.jfrog.lexisnexisrisk.com/artifactory/api/nuget/emlage-localtest
+#           NUGET_KEY: ${{secrets.JFROG_KEY}}
