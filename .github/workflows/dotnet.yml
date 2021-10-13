@@ -25,5 +25,5 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: HelloWorld/HelloWorld/HelloWorld.csproj
-          NUGET_SOURCE: nuget push <PACKAGE> -Source https://useast.jfrog.lexisnexisrisk.com/artifactory/api/nuget/emlage-localtest/emlage-localtest
+          NUGET_SOURCE: https://useast.jfrog.lexisnexisrisk.com/artifactory/api/nuget/emlage-localtest/emlage-localtest
           NUGET_KEY: ${{secrets.JFROG_KEY}}
