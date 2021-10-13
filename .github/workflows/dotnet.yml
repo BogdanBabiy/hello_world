@@ -26,7 +26,7 @@ jobs:
     - name: Set API Key
       run: nuget setapikey babibo01@risk.regn.net:${{secrets.JFROG_KEY}} -Source Artifactory
     - name: Publish Package
-      run: nuget push HelloWorld/HelloWorld/HelloWorld.csproj -Source Artifactory
+      run: nuget push HelloWorld/HelloWorld/bin/Debug/HelloWorld.1.0.0.nupkg -Source Artifactory
 #     - name: Publish FluentEmail.Core
 #       uses: brandedoutcast/publish-nuget@v2.5.2
 #       with:
